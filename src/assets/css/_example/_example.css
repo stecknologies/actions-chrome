@@ -1,0 +1,13 @@
+/* Example stylesheet */
+
+h1 {
+  font-family: helvetica;
+  font-size: 21px;
+  font-weight: 200;
+}
+
+webview{
+  width:75vw;
+  height:75vh;
+  display:inline-flex;
+}
