@@ -15,6 +15,13 @@ export default class Sidebar extends Component{
       return <Search/>
     }
   }
+  getTabs(){
+  window.chrome.tabs.query({currentWindow: true}, function(data){
+      for(let tab of data){
+        console.log(tab.url);
+      }
+  });
+}
 
   render(){
     // map content inside of the flow
@@ -24,6 +31,7 @@ export default class Sidebar extends Component{
     return(
       <div>
         {this.mapFlowData()}
+        {this.getTabs()}
       </div>
     );
   }

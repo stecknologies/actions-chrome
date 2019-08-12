@@ -1,6 +1,6 @@
 {
-  "short_name": "My Extension",
-  "name": "My Extension",
+  "short_name": "Humane",
+  "name": "Humane",
   "version": "1.0",
   "manifest_version": 2,
   "background": {
@@ -13,6 +13,13 @@
       "css": ["/static/css/app.css"],
       "js": ["/static/js/content.js"]
     }
+  ],
+  "chrome_url_overrides" : {
+    "newtab": "index.html"
+  },
+  "permissions":[
+    "tabs",
+    "history"
   ],
   "web_accessible_resources":[
     "/static/css/content.css"
