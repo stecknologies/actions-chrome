@@ -2,7 +2,7 @@ export async function getTabData(){
   let tabs = [];
   await window.chrome.tabs.query({currentWindow: true}, function(data){
     for(let tab in data){
-      tabs.append(tab);
+      tabs.push(tab.url);
     }
   });
   return tabs;
