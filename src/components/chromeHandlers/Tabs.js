@@ -1,7 +1,9 @@
 export async function getTabData(){
-  let d = window.chrome.tabs.query({currentWindow: true}, function(data){
-    console.log(data);
-    return data;
+  let tabs = [];
+  await window.chrome.tabs.query({currentWindow: true}, function(data){
+    for(let tab in data){
+      tabs.append(tab);
+    }
   });
-  return d;
+  return tabs;
 }

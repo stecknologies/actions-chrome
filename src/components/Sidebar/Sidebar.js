@@ -17,7 +17,7 @@ export default class Sidebar extends Component{
     }
   }
   render(){
-    const data = getTabData()
+    const data = getTabData();
     console.log(data);
     return(
       <div>
