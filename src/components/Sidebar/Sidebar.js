@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Search from './Search/Search.js';
 import FlowData from './FlowData/FlowData.js';
+import {getTabData} from '../chromeHandlers/Tabs.js';
 
 export default class Sidebar extends Component{
   constructor(props){
@@ -15,23 +16,12 @@ export default class Sidebar extends Component{
       return <Search/>
     }
   }
-  getTabs(){
-  window.chrome.tabs.query({currentWindow: true}, function(data){
-      for(let tab of data){
-        console.log(tab.url);
-      }
-  });
-}
-
   render(){
-    // map content inside of the flow
-    // add new links to the flow
-    // toggle between links
-    // map all flows
+    const data = getTabData()
+    console.log(data);
     return(
       <div>
         {this.mapFlowData()}
-        {this.getTabs()}
       </div>
     );
   }

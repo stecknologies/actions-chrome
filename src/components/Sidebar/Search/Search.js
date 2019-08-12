@@ -25,16 +25,12 @@ export default class Search extends React.Component{
       let flowName = "newer flow"
       createFlow(flowName, this.state.searchQuery, this.state.searchQuery);
       this.forceUpdate();
-      // const Webshrinker = require("webshrinker");
-      // const webshrinker = new Webshrinker({key: "zxdItL2xcLDc09TcjdLY", secret: "n4sdz9CewfazRDjwjWy7"});
-      // const results = webshrinker.getCategories(this.state.input);
-      // console.log(results);
 
     }
     catch(error){
       this.setState({
         searchQuery: ''
-      });
+      }).bind(this);
       alert(error);
     }
   }
@@ -47,6 +43,9 @@ export default class Search extends React.Component{
           <input type="text" value={this.state.searchQuery} onChange={this.handleChange}/>
           <input type="submit" value="Submit"/>
         </form>
+        <h1>Welcome to Humane</h1>
+        <p>Humane helps you become a smarter browser. We help you organize specific tasks so you can be as efficient as possible.</p>
+        <p>To start, click the Humane button next to your search bar and begin selecting tabs.</p>
       </div>
     );
   }
