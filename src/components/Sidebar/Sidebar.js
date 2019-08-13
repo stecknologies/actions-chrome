@@ -18,17 +18,12 @@ export default class Sidebar extends Component{
   }
 
   async getData(){
-    var tabs = [];
-    const data = await doTabsStuff().then(function(d){
-      for(let i=0; i< d.length; i++){
-        tabs.push(d[i]['title']);
-      }
-    });
-    return await tabs.map(i => i);
+    console.log(doTabsStuff());
   }
-
+  componentDidMount(){
+    this.getData();
+  }
   render(){
-    console.log(this.getData());
     return(
       <div>
         {this.mapFlowData()}
