@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Search from './Search/Search.js';
 import FlowData from './FlowData/FlowData.js';
-import {doTabsStuff} from '../chromeHandlers/Tabs.js';
+import {getTabData} from '../chromeHandlers/Tabs.js';
 
 export default class Sidebar extends Component{
   constructor(props){
@@ -16,17 +16,19 @@ export default class Sidebar extends Component{
       return <Search/>
     }
   }
-
-  async getData(){
-    await doTabsStuff();
+  async getResponse(){
+    const foo  = await getTabData().then(data => data);
+    return foo;
   }
-  componentDidMount(){
-    console.log(this.getData());
+  mapContent(data){
+    console.log(data);
+    return data.map(i => <li>{i.title}</li>);
   }
   render(){
     return(
       <div>
         {this.mapFlowData()}
+        <ul>{this.mapContent(this.getResponse())}</ul>
       </div>
     );
   }
