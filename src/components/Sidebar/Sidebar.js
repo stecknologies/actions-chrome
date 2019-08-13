@@ -18,10 +18,10 @@ export default class Sidebar extends Component{
   }
 
   async getData(){
-    console.log(doTabsStuff());
+    await doTabsStuff();
   }
   componentDidMount(){
-    this.getData();
+    console.log(this.getData());
   }
   render(){
     return(
