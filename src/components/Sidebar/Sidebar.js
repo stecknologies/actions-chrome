@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Search from './Search/Search.js';
 import FlowData from './FlowData/FlowData.js';
-import {getTabData} from '../chromeHandlers/Tabs.js';
+import {doTabsStuff} from '../chromeHandlers/Tabs.js';
 
 export default class Sidebar extends Component{
   constructor(props){
@@ -16,9 +16,19 @@ export default class Sidebar extends Component{
       return <Search/>
     }
   }
+
+  async getData(){
+    var tabs = [];
+    const data = await doTabsStuff().then(function(d){
+      for(let i=0; i< d.length; i++){
+        tabs.push(d[i]['title']);
+      }
+    });
+    return await tabs.map(i => i);
+  }
+
   render(){
-    const data = getTabData();
-    console.log(data);
+    console.log(this.getData());
     return(
       <div>
         {this.mapFlowData()}
