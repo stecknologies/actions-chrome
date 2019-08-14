@@ -11,3 +11,15 @@ webview{
   height:75vh;
   display:inline-flex;
 }
+
+/* .appWrapper{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    background: rgba(0,0,0,.4);
+} */
