@@ -1,17 +1,12 @@
 import React, {Component} from 'react';
-import {currentTabData} from '../chromeHandlers/Tabs';
-import {createAction} from '../gunHandlers/ActionCRUD';
+import {createFromHandlers} from '../chromeHandlers/Tabs';
 export default class AddTab extends Component{
   constructor(props){
     super(props);
     this.handleButtonClick = this.handleButtonClick.bind(this);
   }
   async handleButtonClick(){
-    const tab  = await currentTabData().then(function(data){
-      return [data.title, data.url, data.index];
-    });
-    console.log(tab);
-    createAction("My first test action", tab);
+    createFromHandlers("My first test action");
   }
   render(){
     return(

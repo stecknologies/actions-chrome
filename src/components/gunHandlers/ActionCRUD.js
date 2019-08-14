@@ -21,7 +21,6 @@ export function createAction(name, tab){
   db.get('actions').get(name).get('tabs').once(function(data){
     console.log(data);
   })
-  console.log(tab);
 }
 
 // export function mapActionInstance(){
