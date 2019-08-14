@@ -21,8 +21,10 @@ export function createAction(name, tab){
   db.get('actions').get(name).get('tabs').once(function(data){
     console.log(data);
   })
+  db.get('actions').once(function(data){
+    console.log(data);
+  })
 }
-
 // export function mapActionInstance(){
 //   let urlData, flowData;
 //   db.get('flows').get(currentFlow).get('urls').on(function (url){
