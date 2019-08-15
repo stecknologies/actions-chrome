@@ -26,7 +26,3 @@ export function focusOnAction(allTabs){
   // remove the indicies in the current action
   window.chrome.tabs.remove()
 }
-
-export function openTabs(){
-  
-}
