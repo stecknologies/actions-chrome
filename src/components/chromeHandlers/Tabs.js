@@ -7,7 +7,8 @@ import {createAction} from '../gunHandlers/ActionCRUD.js';
 const currentAction = localStorage.getItem('currentAction');
 export function createFromHandlers(name){
   var promise = new Promise((resolve, reject) => {
-    window.chrome.tabs.getCurrent(resolve);
+    setTimeout(2000);
+    window.chrome.tabs.getSelected(null, resolve);
   });
   promise.then(data => createAction(name, data));
 }
