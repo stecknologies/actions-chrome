@@ -27,7 +27,18 @@ export function createAction(name, tab){
 }
 
 export function mapActions(){
-  const actions = db.get('actions').on(data => console.log(data));
+  let actions = [];
+  db.get('actions').once(function(res, category){
+    let keys = Object.keys(res);
+    keys.map(function(i){
+      db.get('actions').get(i).once(function(res, category){
+        actions.push(res);
+        db.get('actions').get(i).get('tabs').once(d => console.log(d));
+      })
+    });
+  })
+  console.log("Actions" ,actions);
+  return actions;
 }
 // export function mapActionInstance(){
 //   let urlData, flowData;

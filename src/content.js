@@ -45,7 +45,7 @@ chrome.runtime.onMessage.addListener(
 
 function toggle(){
    if(app.style.display === "none"){
-     app.style.display = "block";
+     app.style.display = "grid";
    }else{
      app.style.display = "none";
    }
