@@ -9,7 +9,7 @@ export function createAction(name, tab){
   const action = {
     name: name,
     createdAt: new Date().toISOString(),
-    isOpen: true
+    isOpen: false
   }
   console.log(action);
   db.get('actions').get(name).put(action);
@@ -27,39 +27,18 @@ export function createAction(name, tab){
 }
 
 export function mapActions(){
-  let actions = [];
+  var actions = [];
   db.get('actions').once(function(res, category){
     let keys = Object.keys(res);
     keys.map(function(i){
       db.get('actions').get(i).once(function(res, category){
         actions.push(res);
-        db.get('actions').get(i).get('tabs').once(d => console.log(d));
       })
+      actions.shift();
+      db.get('actions').get(i).get('tabs').once(function(res, category){
+        actions[keys.indexOf(i) - 1]['tabs'] = res;
+;      })
     });
   })
-  console.log("Actions" ,actions);
   return actions;
 }
-// export function mapActionInstance(){
-//   let urlData, flowData;
-//   db.get('flows').get(currentFlow).get('urls').on(function (url){
-//     urlData = url;
-//   });
-//   db.get('flows').get(currentFlow).on(function (flow){
-//     flowData = flow;
-//   });
-//   let allData = {url: urlData, flow: flowData};
-//   return allData;
-// }
-
-// export function getCurrentFlowUrl(){
-//   let currentUrl;
-//   db.get('flows').get(currentFlow).get('urls').on(function (url) {
-//     currentUrl = url['url'];
-//
-//   });
-//   return currentUrl;
-// }
-// export function mapFlows(){
-//   return
-// }

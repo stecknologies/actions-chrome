@@ -7,7 +7,7 @@ export default class AddTab extends Component{
     this.handleButtonClick = this.handleButtonClick.bind(this);
   }
   async handleButtonClick(){
-    createFromHandlers("yay yay yay");
+    createFromHandlers("ayo");
   }
   render(){
     return(
