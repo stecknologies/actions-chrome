@@ -1,5 +1,5 @@
 # humane-chrome
-a browser extension that tracks the user's workflow
+a browser extension that lets users keep track of actions
 
 ### hotlinks
 - using [gun](https://github.com/amark/gun), an offline, decentralized database

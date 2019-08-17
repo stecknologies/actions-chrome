@@ -29,16 +29,20 @@ export function createAction(name, tab){
 export function mapActions(){
   var actions = [];
   db.get('actions').once(function(res, category){
+    console.log("keys", keys);
     let keys = Object.keys(res);
     keys.map(function(i){
       db.get('actions').get(i).once(function(res, category){
+        console.log("each action", res);
         actions.push(res);
       })
       actions.shift();
       db.get('actions').get(i).get('tabs').once(function(res, category){
+        console.log("tab", res);
         actions[keys.indexOf(i) - 1]['tabs'] = res;
-;      })
-    });
+      })
+    })
   })
+  console.log("in fx",actions.length);
   return actions;
 }
