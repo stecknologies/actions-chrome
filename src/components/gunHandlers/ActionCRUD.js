@@ -11,38 +11,36 @@ export function createAction(name, tab){
     createdAt: new Date().toISOString(),
     isOpen: false
   }
-  console.log(action);
-  db.get('actions').get(name).put(action);
-  db.get('actions').get(name).get('tabs').put(tab);
+  const newAction = db.get(name).put(action);
+  db.get('actions').set(newAction);
+  const newTab = db.get('tabs').put(tab);
+  db.get('actions').get(name).set(newTab);
   localStorage.setItem('currentAction', name);
   // db.get('flows').get(name).get('urls').get('url').once(function (flow) {
   //   console.log("flow urls" + flow);
   // })
-  db.get('actions').get(name).get('tabs').once(function(data){
-    console.log(data);
-  })
-  db.get('actions').once(function(data){
-    console.log(data);
-  })
+  // db.get('actions').get(name).get('tabs').once(function(data){
+  //   console.log(data);
+  // })
+  // db.get('actions').once(function(data){
+  //   console.log(data);
+  // })
 }
 
 export function mapActions(){
+  var counter = -1;
   var actions = [];
-  db.get('actions').once(function(res, category){
-    console.log("keys", keys);
-    let keys = Object.keys(res);
-    keys.map(function(i){
-      db.get('actions').get(i).once(function(res, category){
-        console.log("each action", res);
-        actions.push(res);
-      })
-      actions.shift();
-      db.get('actions').get(i).get('tabs').once(function(res, category){
-        console.log("tab", res);
-        actions[keys.indexOf(i) - 1]['tabs'] = res;
-      })
+  db.get('actions').map().once(function(data){
+    // push the name, add data to the name(figure this out)
+    action
+    var keys = Object.keys(data);
+    delete keys[0];
+    keys.map(i=>)
+    counter ++;
+    delete actions[counter]['_'];
+    db.get('actions').get(data['name']).get('tabs').once(function(x){
+      actions[counter]['tabs'] = x;
     })
   })
-  console.log("in fx",actions.length);
   return actions;
 }
