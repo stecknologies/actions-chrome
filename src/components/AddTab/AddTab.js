@@ -1,30 +1,39 @@
 import React, {Component} from 'react';
-import {createFromHandlers} from '../chromeHandlers/Tabs';
+import {createFromHandlers, addToAction} from '../chromeHandlers/Tabs';
+import {mapActions} from '../gunHandlers/ActionCRUD';
 export default class AddTab extends Component{
   constructor(props){
     super(props);
     this.state = {
-      name: ''
+      actions: mapActions()
     };
-    this.addName = this.addName.bind(this);
-    this.handleButtonClick = this.handleButtonClick.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
-  addName(e){
-    this.setState({name: e.target.value});
-  }
-  async handleButtonClick(event){
+  async handleSubmit(event){
     event.preventDefault();
-    console.log("about to create handler with name ", this.state.name);
-    createFromHandlers(this.state.name);
+    console.log(event.target);
+    // if(event.target.value == "create"){
+    //   console.log("creating new action");
+    //   createFromHandlers();
+    // }
+    // else{
+    //   console.log("about to add this tab to action ", event.target.value);
+    //   addToAction(event.target.value);
+    // }
   }
   render(){
     return(
       <div>
-        <h3>Create a new action with this url.</h3>
-        <form onSubmit={this.handleButtonClick}>
-          <input onChange={this.addName} placeholder="Action name" value={this.state.name}/>
-          <input type="submit" value="Submit" />
-        </form>
+        <h3>Add this tab to an action or create a new one.</h3>
+        <form onSubmit={this.handleSubmit}>
+          <select>
+            <optgroup label="Choose an option">
+              <option value="create">Create new action</option>
+              {this.state.actions.map(action => <option value={action.name}>{action.name}</option>)}
+            </optgroup>
+          </select>
+        <input type="submit" value="Submit" />
+      </form>
       </div>
     );
   }

@@ -3,16 +3,22 @@
 //     window.chrome.tabs.query({currentWindow: true}, resolve);
 //   });
 // }
-import {createAction} from '../gunHandlers/ActionCRUD.js';
+import {createAction, addTabToAction} from '../gunHandlers/ActionCRUD.js';
 const currentAction = localStorage.getItem('currentAction');
-export function createFromHandlers(name){
+export function createFromHandlers(){
   var promise = new Promise((resolve, reject) => {
     setTimeout(2000);
     window.chrome.tabs.getSelected(null, resolve);
   });
-  promise.then(data => createAction(name, data));
+  promise.then(data => createAction(data));
 }
-
+export function addToAction(action){
+  var promise = new Promise((resolve, reject) => {
+    setTimeout(2000);
+    window.chrome.tabs.getSelected(null, resolve);
+  });
+  promise.then(data => addTabToAction(action, data));
+}
 export function getAllTabs(){
   var promise = new Promise((resolve,reject) =>{
     window.chrome.tabs.query(resolve);

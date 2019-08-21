@@ -16,15 +16,9 @@ export function createAction(name, tab){
   const newTab = db.get('tabs').put(tab);
   db.get('actions').get(name).set(newTab);
   localStorage.setItem('currentAction', name);
-  // db.get('flows').get(name).get('urls').get('url').once(function (flow) {
-  //   console.log("flow urls" + flow);
-  // })
-  // db.get('actions').get(name).get('tabs').once(function(data){
-  //   console.log(data);
-  // })
-  // db.get('actions').once(function(data){
-  //   console.log(data);
-  // })
+}
+export function addTabToAction(action, tab){
+  db.get(action).get('tabs').set(tab);
 }
 
 export function mapActions(){
