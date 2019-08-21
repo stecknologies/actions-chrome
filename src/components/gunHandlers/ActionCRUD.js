@@ -28,18 +28,13 @@ export function createAction(name, tab){
 }
 
 export function mapActions(){
-  var counter = -1;
   var actions = [];
-  db.get('actions').map().once(function(data){
-    // push the name, add data to the name(figure this out)
-    action
-    var keys = Object.keys(data);
-    delete keys[0];
-    keys.map(i=>)
-    counter ++;
-    delete actions[counter]['_'];
-    db.get('actions').get(data['name']).get('tabs').once(function(x){
-      actions[counter]['tabs'] = x;
+  var counter = 0;
+  db.get('actions').map().on(function(data){
+    actions.push(data);
+    db.get('actions').get(data['name']).get('tabs').on(function(tab){
+      actions[counter]['tabs'] = tab;
+      counter ++;
     })
   })
   return actions;
