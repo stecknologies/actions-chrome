@@ -12,7 +12,10 @@ export function addToAction(action){
     setTimeout(2000);
     window.chrome.tabs.getSelected(null, resolve);
   });
-  promise.then(data => addTabToAction(action, data));
+  promise.then(function(data){
+    console.log("adding " + data['title'] + " to " + action);
+    addTabToAction(action, data)}
+  );
 }
 export function getAllTabs(){
   var promise = new Promise((resolve,reject) =>{
