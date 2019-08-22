@@ -8,7 +8,7 @@ function DisplayActions(){
   return(
     <div className="action">
       <h1>Actions</h1> 
-      {actions.map(element => <Action name={element.name} isOpen={element.isOpen} tabs={element.tabs}/>)}
+      {actions.length > 0 ? actions.map(element => <Action name={element.name} isOpen={element.isOpen} tabs={element.tabs}/>) : <h3>No actions. Create one!</h3>}
     </div>
   );
 }
