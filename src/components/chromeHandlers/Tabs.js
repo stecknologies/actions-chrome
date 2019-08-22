@@ -1,11 +1,11 @@
 import {createAction, addTabToAction} from '../gunHandlers/ActionCRUD.js';
 const currentAction = localStorage.getItem('currentAction');
-export async function createFromHandlers(){
+export function createFromHandlers(){
   var promise = new Promise((resolve, reject) => {
    //setTimeout(2000);
     window.chrome.tabs.getSelected(null, resolve);
   });
-  await promise.then(data => createAction(data['title'], data));
+  promise.then(data => createAction(data['title'], data));
 }
 export function addToAction(action){
   var promise = new Promise((resolve, reject) => {

@@ -1,8 +1,10 @@
 import Gun from 'gun/gun';
 import React from 'react';
 var db = Gun();
-var currentAction = localStorage.getItem('currentAction');
+//var currentAction = localStorage.getItem('currentAction');
 export function createAction(name, tab){
+  localStorage.clear();
+  console.log(tab);
   var action = {
     name: name,
     createdAt: new Date().toISOString(),
@@ -11,8 +13,8 @@ export function createAction(name, tab){
   var newAction = db.get(name).put(action);
   db.get('actions').set(newAction);
   var newTab = db.get(tab['url']).put(tab);
-  db.get('actions').get(name).get('tabs').set(tab);
-  db.get('actions').get(name).get('tabs').map().once((data) => console.log(data));
+  db.get('actions').get(name).get('tabs').set(newTab);
+  db.get('actions').get(name).get('tabs').map().once(data => console.log(data));
   localStorage.setItem('currentAction', name);
 }
 export function addTabToAction(action, tab){
