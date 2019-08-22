@@ -3,21 +3,20 @@ import React from 'react';
 //import 'gun/sea';
 // import 'gun/lib/webrtc';
 // import 'gun/lib/open';
-const db = Gun();
-const currentAction = localStorage.getItem('currentAction');
+var db = Gun();
+var currentAction = localStorage.getItem('currentAction');
 export function createAction(name, tab){
-  const newName = tab['title'];
-  const action = {
-    name: newName,
+  var action = {
+    name: name,
     createdAt: new Date().toISOString(),
     isOpen: true
   };
-  const newAction = db.get(newName).put(action);
+  var newAction = db.get(name).put(action);
   db.get('actions').set(newAction);
-  const newTab = db.get(tab['title']).put(tab);
-  db.get('actions').get(newName).get('tabs').set(newTab);
-  db.get('actions').get(newName).map().on(data => console.log(data));
-  localStorage.setItem('currentAction', newName);
+  var newTab = db.get('this tab').put(tab);
+  db.get('actions').get(name).get('tabs').set(newTab);
+  db.get('actions').get(name).get('tabs').map().once((data) => console.log(data));
+  localStorage.setItem('currentAction', name);
 }
 export function addTabToAction(action, tab){
  const newTab = db.get(tab['title']).put(tab);

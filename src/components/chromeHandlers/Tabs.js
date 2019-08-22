@@ -5,7 +5,7 @@ export function createFromHandlers(){
    setTimeout(2000);
     window.chrome.tabs.getSelected(null, resolve);
   });
-  promise.then(data => createAction("Dylan", data));
+  promise.then(data => createAction(data['title'], data));
 }
 export function addToAction(action){
   var promise = new Promise((resolve, reject) => {
