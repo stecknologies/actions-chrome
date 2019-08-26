@@ -1,7 +1,7 @@
 import Gun from 'gun/gun';
 import React from 'react';
 var db = Gun();
-//var currentAction = localStorage.getItem('currentAction');
+var currentAction = localStorage.getItem('currentAction');
 
 export function createAction(name, tab){
  var tabTitle = String(tab['title'] + tab['id']);
@@ -15,6 +15,7 @@ export function createAction(name, tab){
  db.get('actions').get(name).get('tabs').set(thisTab);
  db.get('actions').get(name).once(d=> console.log(d));
  db.get('actions').get(name).get('tabs').map().once(d => console.log(d));
+ localStorage.setItem('currentAction', name);
 }
 export function addTabToAction(action, tab){
  // const newTab = db.get(tab['title']).put(tab);
@@ -24,16 +25,22 @@ export function addTabToAction(action, tab){
 export function mapActions(){
   var actions = [];
   var counter = 0;
-  db.get('actions').map().on(function(data){
-    console.log(data);
-    var tabData = [];
-    // db.get('actions').get(data['name']).get('tabs').map().on(function(tab){
-    //   tabData.push(tab);
-    // })
-    actions.push(data);
-    // console.log(tabData);
-    // actions[counter]['tabs'] = tabData;
-    counter ++;
-  });
-  return actions;
+  if(currentAction){
+    db.get('actions').map().on(function(data){
+      console.log(data);
+      actions.push(data);
+      // var tabData = [];
+      // db.get('actions').get(data['name']).get('tabs').map().on(function(tab){
+      //   console.log(tab);
+      //   tabData.push(tab);
+      // })
+      // console.log(tabData);
+      // actions[counter]['tabs'] = tabData;
+      // counter ++;
+    });
+  }
+  else{
+    console.log("No actions have been created, so nothing will be mapped.")
+  }
+  return actions
 }
