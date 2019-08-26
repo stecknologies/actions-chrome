@@ -5,7 +5,7 @@ function Action(props){
 		<div>
 			<h3>{props.name}</h3><small>{props.isOpen ? "Active" : ""}</small>
 			<h6>Tabs</h6>
-			{Object.keys(props.tabs).map(tab => <a href={props.tabs[tab].url}>{props.tabs[tab].title}</a>)}
+			{props.tabs.map(tab => <a href={tab.url}>{tab.url}</a>)}
 		</div>
 	);
 }

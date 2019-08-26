@@ -14,8 +14,8 @@ export function addToAction(action){
   });
   promise.then(function(data){
     console.log("adding " + data['title'] + " to " + action);
-    addTabToAction(action, data)}
-  );
+    //addTabToAction(action, data);
+  });
 }
 export function getAllTabs(){
   var promise = new Promise((resolve,reject) =>{
