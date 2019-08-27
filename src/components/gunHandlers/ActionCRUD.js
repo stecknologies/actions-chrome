@@ -10,7 +10,6 @@ export function createAction(name, tab){
   createdAt: new Date().toISOString()
  });
  db.get('actions').get(name).get('tabs').get(tabTitle).put({url: tab['url'], title: tab['title'], id: tab['id']});
- db.get('actions').get(name).get('tabs').map().once(d=> console.log(d));
  localStorage.setItem('currentAction', name);
 }
 export function addTabToAction(action, tab){
@@ -26,8 +25,9 @@ export function mapActions(){
       console.log(data);
       actions.push(data);
       var tabData = [];
+      console.log(data['name']);
       db.get('actions').get(data['name']).get('tabs').map().on(function(tab){
-        console.log(tab);
+        console.log("tab", tab);
         tabData.push(tab);
       })
       console.log(tabData);
