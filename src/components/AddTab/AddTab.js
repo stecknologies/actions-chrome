@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import {createFromHandlers, addToAction} from '../chromeHandlers/Tabs';
-import {mapActions} from '../gunHandlers/ActionCRUD';
+// import {createFromHandlers, addToAction} from '../chromeHandlers/Tabs';
+// import {mapActions} from '../gunHandlers/ActionCRUD';
 export default class AddTab extends Component{
   constructor(props){
     super(props);
     this.state = {
-      actions: mapActions(),
+      actions: JSON.parse(localStorage.getItem('actions')),
       value: ''
     };
     this.handleChange = this.handleChange.bind(this);
@@ -20,13 +20,31 @@ export default class AddTab extends Component{
     }
     else if(this.state.value == "create"){
       console.log("creating new action");
-      createFromHandlers();
+      this.createFromHandlers();
     }
     else{
       console.log("about to add this tab to action ", this.state.value);
-      addToAction(this.state.value);
+      this.props.actionToAddTo(this.state.value);
+      this.addFromHandlers();
     }
   }
+
+  createFromHandlers(){
+    var promise = new Promise((resolve, reject) => {
+     //setTimeout(2000);
+      window.chrome.tabs.getSelected(null, resolve);
+    });
+    promise.then(data => this.props.currentTab(data));
+  }
+  addFromHandlers(){
+    var promise = new Promise((resolve, reject) => {
+     //setTimeout(2000);
+      window.chrome.tabs.getSelected(null, resolve);
+    });
+    promise.then(data => this.props.tabData(data));
+  }
+
+
   render(){
     return(
       <div>
@@ -35,7 +53,7 @@ export default class AddTab extends Component{
           <select value={this.state.value} onChange={this.handleChange}>
             <option value="disabled">Choose an option below.</option>
             <option value="create">Create new action</option>
-            {this.state.actions.map(action => <option value={action.name}>{action.name}</option>)}
+            {this.state.actions ? this.state.actions.map(action => <option value={action.name}>{action.name}</option>) : console.log("no choice actions to map")}
           </select>
         <input type="submit" value="Submit" />
       </form>
