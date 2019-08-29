@@ -8,14 +8,15 @@ export default class App extends Component{
   constructor(props){
     super(props);
     this.state = {
-      actions: [],
+      actions: JSON.parse(localStorage.getItem('actions')),
       actionToAppend: ''
     };
+    console.log(this.state.actions);
     this.createAction = this.createAction.bind(this);
   }
   createAction = (tab) => {
       var allTabs = [tab];
-      var actions;
+      var actions = [];
       var action = {
         name: tab['title'],
         created_at: new Date().toISOString(),
@@ -46,6 +47,15 @@ export default class App extends Component{
     localStorage.setItem('actions', JSON.stringify(actions));
     this.forceUpdate();
   }
+  deleteAction = (action) => {
+    var actions = JSON.parse(localStorage.getItem('actions'));
+    var actionIndex = actions.map(function(e) { return e.name; }).indexOf(action);
+    delete actions[actionIndex];
+    localStorage.setItem('actions', JSON.stringify(actions));
+    this.setState({actions: actions});
+    console.log(action + " deleted");
+    this.forceUpdate();
+  }
   componentDidMount(){
     if(localStorage.getItem('actions')){
       this.setState({
@@ -58,7 +68,7 @@ export default class App extends Component{
       <div>
         <AddTab currentTab={this.createAction} tabData={this.addToAction} actionToAddTo={this.selectedAction}/>
         <h1>Actions</h1>
-        {this.state.actions.length > 0 ? this.state.actions.map(element => <Action name={element.name} isOpen={element.isOpen} tabs={element.tabs}/>) : <h3>No actions. Create one!</h3>}
+        {this.state.actions != null ? this.state.actions.map(element => <Action name={element.name} isOpen={element.isOpen} tabs={element.tabs} handleDeletion={this.deleteAction}/>) : <h3>No actions. Create one!</h3>}
       </div>
     );
   }

@@ -1,12 +1,21 @@
-import React from 'React';
+import React, {Component} from 'react';
 
-function Action(props){
-	return(
-		<div>
-			<h3>{props.name}</h3><small>{props.isOpen ? "Active" : ""}</small>
-			<h6>Tabs</h6>
-			{props.tabs.map(tab => <a href={tab.url}>{tab.url}</a>)}
-		</div>
-	);
+export default class Action extends Component{
+	constructor(props){
+		super(props);
+		this.deleteAction = this.deleteAction.bind(this);
+	}
+  deleteAction(event){
+		event.preventDefault();
+		this.props.handleDeletion(this.props.name);
+	}
+	render(){
+		return(
+			<div>
+				<h3>{this.props.name}</h3><form onSubmit={this.deleteAction}><input type="submit" value="Delete action"/></form>
+				<h6>Tabs</h6>
+				{this.props.tabs.map(tab => <a href={tab.url}>{tab.title}</a>)}
+			</div>
+		);
+	}
 }
-export default Action;
