@@ -12,7 +12,7 @@ export default class Action extends Component{
 	render(){
 		return(
 			<div>
-				<h3>{this.props.name}</h3><form onSubmit={this.deleteAction}><input type="submit" value="Delete action"/></form>
+				<h3>{this.props.name}</h3><small>Name your action</small><form onSubmit={this.deleteAction}><input type="submit" value="Delete action"/></form>
 				<h6>Tabs</h6>
 				{this.props.tabs.map(tab => <a href={tab.url}>{tab.title}</a>)}
 			</div>

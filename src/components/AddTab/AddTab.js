@@ -7,25 +7,21 @@ export default class AddTab extends Component{
     this.state = {
       value: ''
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleCreation = this.handleCreation.bind(this);
+    this.handleAddition = this.handleAddition.bind(this);
   }
   handleChange(e){this.setState({value: e.target.value});}
-  async handleSubmit(event){
+  async handleCreation(event){
     event.preventDefault();
-    console.log("State", this.state.value);
-    if(this.state.value == "disabled"){
-      alert("Please choose a valid response and try again.");
-    }
-    else if(this.state.value == "create"){
-      console.log("creating new action");
-      this.createFromHandlers();
-    }
-    else{
-      console.log("about to add this tab to action ", this.state.value);
-      this.props.actionToAddTo(this.state.value);
-      this.addFromHandlers();
-    }
+    console.log("creating new action");
+    this.createFromHandlers();
+    this.props.newActionName(event.target.value);
+  }
+  async handleAddition(event){
+    event.preventDefault();
+    console.log("creating new action");
+    this.props.actionToAddTo(this.state.value);
+    this.addFromHandlers();
   }
 
   createFromHandlers(){
@@ -53,13 +49,15 @@ export default class AddTab extends Component{
     return(
       <div>
         <h3>Add this tab to an action or create a new one.</h3>
-        <form onSubmit={this.handleSubmit}>
-          <select value={this.state.value} onChange={this.handleChange}>
-            <option value="disabled">Choose an option below.</option>
-            <option value="create">Create new action</option>
-            {this.props.actions != [] ? this.props.actions.map(action => <option value={action.name}>{action.name}</option>) : console.log("no choice actions to map")}
-          </select>
+        <form onSubmit={this.handleCreation}>
+          <input type="text" name="newAction" value={this.state.value} onChange={this.handleChange} placeholder="Name your new action"/>
         <input type="submit" value="Submit" />
+      </form>
+      <form onSubmit={this.handleAddition}>
+        <select value={this.state.value} onChange={this.handleChange}>
+          <option value="disabled">Choose an option below.</option>
+          {this.props.actions != [] ? this.props.actions.map(action => <option value={action.name}>{action.name}</option>) : console.log("no choice actions to map")}
+        </select>
       </form>
       </div>
     );

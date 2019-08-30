@@ -9,16 +9,17 @@ export default class App extends Component{
     super(props);
       this.state = {
         actions: [],
-        actionToAppend: ''
+        actionToAppend: '',
+        newActionName: ''
       };
     console.log(this.state.actions);
     this.createAction = this.createAction.bind(this);
   }
-  createAction = (tab) => {
+  createAction = (tab, name) => {
       var allTabs = [tab];
       var actions = [];
       var action = {
-        name: tab['title'],
+        name: this.state.newActionName,
         created_at: new Date().toISOString(),
         tabs: allTabs
       };
@@ -36,6 +37,9 @@ export default class App extends Component{
   }
   selectedAction = (action) => {
     this.setState({actionToAppend: action});
+  }
+  postNewActionName = (actionName) => {
+    this.setState({newActionName: actionName});
   }
   addToAction = (tab) => {
     var actions = JSON.parse(localStorage.getItem('actions'));
@@ -76,7 +80,7 @@ export default class App extends Component{
   render(){
     return(
       <div>
-        <AddTab currentTab={this.createAction} tabData={this.addToAction} actionToAddTo={this.selectedAction} actions={this.state.actions}/>
+        <AddTab currentTab={this.createAction} tabData={this.addToAction} actionToAddTo={this.selectedAction} actions={this.state.actions} newActionName={this.postNewActionName}/>
         <h1>Actions</h1>
         {this.state.actions != [] ? this.state.actions.map(element => <Action name={element.name} isOpen={element.isOpen} tabs={element.tabs} handleDeletion={this.deleteAction}/>) : <h3>No actions. Create one!</h3>}
       </div>
