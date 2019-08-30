@@ -5,7 +5,6 @@ export default class AddTab extends Component{
   constructor(props){
     super(props);
     this.state = {
-      actions: [],
       value: ''
     };
     this.handleChange = this.handleChange.bind(this);
@@ -34,16 +33,19 @@ export default class AddTab extends Component{
      //setTimeout(2000);
       window.chrome.tabs.getSelected(null, resolve);
     });
-    promise.then(function(data){
-      console.log(data);
-      this.props.currentTab(data);
-    });
+    promise.then(d=> this.sendCurrentTab(d));
   }
   addFromHandlers(){
     var promise = new Promise((resolve, reject) => {
       window.chrome.tabs.getSelected(null, resolve);
     });
-    promise.then(data => this.props.tabData(data));
+    promise.then(data => this.sendTabData(data));
+  }
+  sendCurrentTab(tab){
+    this.props.currentTab(tab);
+  }
+  sendTabData(tab){
+    this.props.tabData(tab);
   }
 
 
@@ -55,7 +57,7 @@ export default class AddTab extends Component{
           <select value={this.state.value} onChange={this.handleChange}>
             <option value="disabled">Choose an option below.</option>
             <option value="create">Create new action</option>
-            {this.state.actions.length > 0 ? this.state.actions.map(action => <option value={action.name}>{action.name}</option>) : console.log("no choice actions to map")}
+            {this.props.actions != [] ? this.props.actions.map(action => <option value={action.name}>{action.name}</option>) : console.log("no choice actions to map")}
           </select>
         <input type="submit" value="Submit" />
       </form>
