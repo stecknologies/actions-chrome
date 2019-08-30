@@ -13,9 +13,17 @@ export default class App extends Component{
         newActionName: ''
       };
     console.log(this.state.actions);
+    this.selectedAction = this.selectedAction.bind(this);
+    this.postNewActionName = this.postNewActionName.bind(this);
     this.createAction = this.createAction.bind(this);
   }
-  createAction = (tab, name) => {
+  selectedAction = (action) => {
+    this.setState({actionToAppend: action});
+  }
+  postNewActionName = (actionName) => {
+    this.setState({newActionName: actionName});
+  }
+  createAction = (tab) => {
       var allTabs = [tab];
       var actions = [];
       var action = {
@@ -34,12 +42,6 @@ export default class App extends Component{
       console.log(this.state.actions);
       localStorage.setItem('actions', JSON.stringify(actions));
       this.forceUpdate();
-  }
-  selectedAction = (action) => {
-    this.setState({actionToAppend: action});
-  }
-  postNewActionName = (actionName) => {
-    this.setState({newActionName: actionName});
   }
   addToAction = (tab) => {
     var actions = JSON.parse(localStorage.getItem('actions'));
