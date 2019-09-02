@@ -48,7 +48,22 @@ export default class AddTab extends Component{
     this.props.tabData(tab);
   }
 
-
+  mapAddToAction(){
+   if('actions' in localStorage){
+      return(
+        <form onSubmit={this.handleAddition}>
+          <select value={this.state.addValue} onChange={this.handleAddValueChange}>
+            <option value="disabled">Choose an option below.</option>
+            {this.props.actions.map(action => <option value={action.name}>{action.name}</option>)}
+          </select>
+          <input type="submit" value="Add to action" />
+        </form>
+      );
+    }
+    else{
+      console.log("Not allowing to add to an action because there are no actions.")
+    }
+  }
   render(){
     return(
       <div>
@@ -58,13 +73,7 @@ export default class AddTab extends Component{
         <input type="text" name="newAction" value={this.state.createValue} onChange={this.handleCreateValueChange}/>
         <input type="submit" value="Create" />
       </form>
-      <form onSubmit={this.handleAddition}>
-        <select value={this.state.addValue} onChange={this.handleAddValueChange}>
-          <option value="disabled">Choose an option below.</option>
-          {this.props.actions != [] ? this.props.actions.map(action => <option value={action.name}>{action.name}</option>) : console.log("no choice actions to map")}
-        </select>
-        <input type="submit" value="Add to action" />
-      </form>
+      {this.mapAddToAction()}
       </div>
     );
   }
