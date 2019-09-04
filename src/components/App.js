@@ -97,6 +97,10 @@ export default class App extends Component{
     }
     ReactGA.initialize('UA-147084998-1');
     ReactGA.pageview(window.location.pathname + window.location.search);
+    ReactGA.event({
+  category: 'User',
+  action: 'Loaded'
+});
   }
   render(){
     return(
