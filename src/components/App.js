@@ -1,7 +1,6 @@
 import '../assets/css/App.css'
 import React, {Component} from 'react';
 import AddTab from './AddTab/AddTab';
-//import DisplayActions from './DisplayActions/DisplayActions';
 import Action from './DisplayActions/Action/Action';
 
 export default class App extends Component{
@@ -52,6 +51,7 @@ export default class App extends Component{
     tabs.push(tab);
     actions[actionIndex]['tabs'] = tabs;
     localStorage.setItem('actions', JSON.stringify(actions));
+    this.setState({actions: actions});
     this.forceUpdate();
   }
   deleteAction = (action) => {

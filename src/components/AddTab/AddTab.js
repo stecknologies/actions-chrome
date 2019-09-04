@@ -52,6 +52,7 @@ export default class AddTab extends Component{
    if('actions' in localStorage){
       return(
         <form onSubmit={this.handleAddition}>
+          <h4>Add this tab to an existing action</h4>
           <select value={this.state.addValue} onChange={this.handleAddValueChange}>
             <option value="disabled">Choose an option below.</option>
             {this.props.actions.map(action => <option value={action.name}>{action.name}</option>)}
@@ -60,20 +61,31 @@ export default class AddTab extends Component{
         </form>
       );
     }
+  }
+  showProperMessage(){
+    if('actions' in localStorage){
+      console.log("no message")
+    }
     else{
-      console.log("Not allowing to add to an action because there are no actions.")
+      return(
+        <div>
+          <h1>Welcome to Actions</h1>
+          <p>Easily group and track your tasks online.</p>
+          <p>Simply create an action and add tabs to it.</p><br/>
+        </div>
+      )
     }
   }
   render(){
     return(
       <div>
-        <h3>Add this tab to an action or create a new one.</h3>
-      <form onSubmit={this.handleCreation}>
-        <label for="newAction">Name your new action</label>
-        <input type="text" name="newAction" value={this.state.createValue} onChange={this.handleCreateValueChange}/>
-        <input type="submit" value="Create" />
-      </form>
-      {this.mapAddToAction()}
+        {this.showProperMessage()}
+        <form onSubmit={this.handleCreation}>
+          <h3>Create a new action</h3>
+          <input type="text" name="newAction" value={this.state.createValue} onChange={this.handleCreateValueChange} placeholder="Name"/>
+          <input type="submit" value="Create" />
+        </form>
+        {this.mapAddToAction()}
       </div>
     );
   }
