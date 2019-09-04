@@ -2,6 +2,7 @@ import '../assets/css/App.css'
 import React, {Component} from 'react';
 import AddTab from './AddTab/AddTab';
 import Action from './DisplayActions/Action/Action';
+import ReactGA from 'react-ga';
 
 export default class App extends Component{
   constructor(props){
@@ -94,6 +95,8 @@ export default class App extends Component{
       console.log("is null cdm");
       console.log(JSON.parse(localStorage.getItem('actions')));
     }
+    ReactGA.initialize('UA-147084998-1');
+    ReactGA.pageview(window.location.pathname + window.location.search);
   }
   render(){
     return(
