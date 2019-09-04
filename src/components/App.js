@@ -66,6 +66,22 @@ export default class App extends Component{
     }
     this.forceUpdate();
   }
+  deleteTab = (tab, action) => {
+    var actions = JSON.parse(localStorage.getItem('actions'));
+    var actionIndex = actions.map(function(e) { return e.name; }).indexOf(action);
+    console.log(actionIndex);
+    var tabs = actions[actionIndex]['tabs'];
+    console.log(tabs);
+    var tabIndex = tabs.map(function(e) { return e.title; }).indexOf(tab);
+    actions[actionIndex]['tabs'].splice(tabIndex, 1);
+    localStorage.setItem('actions', JSON.stringify(actions));
+    this.setState({actions: actions});
+    console.log(tab + " tab deleted");
+    if(localStorage.getItem('actions').includes('null')){
+      localStorage.removeItem('actions');
+    }
+    this.forceUpdate();
+  }
   componentDidMount(){
     if('actions' in localStorage){
       this.setState({
@@ -84,7 +100,7 @@ export default class App extends Component{
       <div>
         <AddTab currentTab={this.createAction} tabData={this.addToAction} actionToAddTo={this.selectedAction} actions={this.state.actions} newActionName={this.postNewActionName}/>
         <h1>Actions</h1>
-        {this.state.actions != [] ? this.state.actions.map(element => <Action name={element.name} isOpen={element.isOpen} tabs={element.tabs} handleDeletion={this.deleteAction}/>) : <h3>No actions. Create one!</h3>}
+        {this.state.actions != [] ? this.state.actions.map(element => <Action name={element.name} isOpen={element.isOpen} tabs={element.tabs} handleDeletion={this.deleteAction} handleTabDeletion={(tab) => {this.deleteTab(tab, element.name)}}/>) : <h3>No actions. Create one!</h3>}
       </div>
     );
   }
