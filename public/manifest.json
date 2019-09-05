@@ -16,9 +16,6 @@
       "js": ["/static/js/content.js"]
     }
   ],
-  "chrome_url_overrides" : {
-    "newtab": "index.html"
-  },
   "permissions":[
     "tabs",
     "history"

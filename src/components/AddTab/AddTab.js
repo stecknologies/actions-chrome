@@ -51,14 +51,17 @@ export default class AddTab extends Component{
   mapAddToAction(){
    if('actions' in localStorage){
       return(
+        <div>
         <form onSubmit={this.handleAddition}>
-          <h4>Add this tab to an existing action</h4>
+          <h5>Add this tab to an existing action</h5>
           <select value={this.state.addValue} onChange={this.handleAddValueChange}>
             <option value="disabled">Choose an option below.</option>
             {this.props.actions.map(action => <option value={action.name}>{action.name}</option>)}
           </select>
-          <input type="submit" value="Add to action" />
+          <input type="submit" value="Add to action" className="btn btn-primary" />
         </form>
+        <br/>
+        </div>
       );
     }
   }
@@ -78,13 +81,14 @@ export default class AddTab extends Component{
   }
   render(){
     return(
-      <div>
+      <div className="addTab">
         {this.showProperMessage()}
         <form onSubmit={this.handleCreation}>
-          <h3>Create a new action</h3>
-          <input type="text" name="newAction" value={this.state.createValue} onChange={this.handleCreateValueChange} placeholder="Name"/>
-          <input type="submit" value="Create" />
+          <h5>Create a new action</h5>
+          <input className="form-control" type="text" name="newAction" value={this.state.createValue} onChange={this.handleCreateValueChange} placeholder="Name"/>
+          <input type="submit" value="Create" className="btn btn-primary" />
         </form>
+        <br/>
         {this.mapAddToAction()}
       </div>
     );

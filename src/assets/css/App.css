@@ -1,14 +1,24 @@
-body{
-  
+@font-face{
+  font-family: "Recoleta", sans-serif;
+  font-weight: normal;
+  src: url("../fonts/Recoleta-Regular.ttf");
+}
+@font-face{
+  font-family: "Recoleta", sans-serif;
+  font-weight: bold;
+  src: url("../fonts/Recoleta-Bold.ttf");
 }
 
-.header{
 
+.app{
+  font-family: "Recoleta", sans-serif !important;
+  background-color: #2B2D42 !important;
+  color:white;
 }
-form{
-
-}
-
 .action{
+  color:black !important;
+}
 
+.addTab{
+  margin-top:15px;
 }

@@ -1,4 +1,5 @@
-import '../assets/css/App.css'
+import '../assets/css/App.css';
+import '../assets/css/bootstrap.css'
 import React, {Component} from 'react';
 import AddTab from './AddTab/AddTab';
 import Action from './DisplayActions/Action/Action';
@@ -93,20 +94,18 @@ export default class App extends Component{
     }
     else{
       console.log("is null cdm");
+      localStorage.removeItem('actions');
       console.log(JSON.parse(localStorage.getItem('actions')));
     }
     ReactGA.initialize('UA-147084998-1');
     ReactGA.pageview(window.location.pathname + window.location.search);
-    ReactGA.event({
-  category: 'User',
-  action: 'Loaded'
-});
   }
   render(){
     return(
-      <div>
+      <div className="app">
         <AddTab currentTab={this.createAction} tabData={this.addToAction} actionToAddTo={this.selectedAction} actions={this.state.actions} newActionName={this.postNewActionName}/>
-        <h1>Actions</h1>
+        <br/><br/>
+        <h3>Actions</h3>
         {this.state.actions != [] ? this.state.actions.map(element => <Action name={element.name} isOpen={element.isOpen} tabs={element.tabs} handleDeletion={this.deleteAction} handleTabDeletion={(tab) => {this.deleteTab(tab, element.name)}}/>) : <h3>No actions. Create one!</h3>}
       </div>
     );
