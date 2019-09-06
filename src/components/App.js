@@ -3,7 +3,7 @@ import '../assets/css/bootstrap.css'
 import React, {Component} from 'react';
 import AddTab from './AddTab/AddTab';
 import Action from './DisplayActions/Action/Action';
-import ReactGA from 'react-ga';
+// import ReactGA from 'react-ga';
 
 export default class App extends Component{
   constructor(props){
@@ -85,7 +85,10 @@ export default class App extends Component{
     this.forceUpdate();
   }
   componentDidMount(){
-    if('actions' in localStorage){
+    if(localStorage.getItem('actions') == "[]" || localStorage.getItem('actions') == "null"){
+      localStorage.removeItem('actions');
+    }
+    else if('actions' in localStorage){
       this.setState({
         actions: JSON.parse(localStorage.getItem('actions'))
       });
@@ -97,9 +100,9 @@ export default class App extends Component{
       localStorage.removeItem('actions');
       console.log(JSON.parse(localStorage.getItem('actions')));
     }
-    ReactGA.initialize('UA-147084998-2');
-    ReactGA.pageview(window.location.pathname + window.location.search);
-    console.log(window.location.pathname + window.location.search);
+    // ReactGA.initialize('UA-147084998-2');
+    // ReactGA.pageview(window.location.pathname + window.location.search);
+    // console.log(window.location.pathname + window.location.search);
   }
   render(){
     return(

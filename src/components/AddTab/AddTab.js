@@ -71,8 +71,8 @@ export default class AddTab extends Component{
     }
     else{
       return(
-        <div>
-          <h1>Welcome to Actions</h1>
+        <div className="introText">
+          <h2>Welcome to Actions</h2>
           <p>Easily group and track your tasks online.</p>
           <p>Simply create an action and add tabs to it.</p><br/>
         </div>

@@ -9,11 +9,15 @@
   src: url("../fonts/Recoleta-Bold.ttf");
 }
 
+#actionbody{
+  background-color: #2B2D42 !important;
+}
 
 .app{
   font-family: "Recoleta", sans-serif !important;
-  background-color: #2B2D42 !important;
   color:white;
+  top: 0 !important;
+  vertical-align: center;
 }
 .action{
   color:black !important;
@@ -21,4 +25,7 @@
 
 .addTab{
   margin-top:15px;
+}
+.introText{
+  text-align:center;
 }
