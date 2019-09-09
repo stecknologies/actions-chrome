@@ -29,3 +29,7 @@
 .introText{
   text-align:center;
 }
+
+.card, .list-group-item{
+  margin-bottom:30px !important;
+}
