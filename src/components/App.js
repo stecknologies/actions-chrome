@@ -100,9 +100,6 @@ export default class App extends Component{
       localStorage.removeItem('actions');
       console.log(JSON.parse(localStorage.getItem('actions')));
     }
-    // ReactGA.initialize('UA-147084998-2');
-    // ReactGA.pageview(window.location.pathname + window.location.search);
-    // console.log(window.location.pathname + window.location.search);
   }
   render(){
     return(
