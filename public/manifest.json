@@ -1,9 +1,12 @@
 {
-  "short_name": "Actions",
   "name": "Actions",
-  "description": "Keep track of what you're doing",
+  "description": "Easily track what you're doing online by grouping tabs that have related content",
   "version": "1.0",
+  "author": "Stecknologies",
   "manifest_version": 2,
+  "icons": {
+     "128": "icon128.png"
+   },
   "background": {
     "scripts": ["app/background.js"]
   },

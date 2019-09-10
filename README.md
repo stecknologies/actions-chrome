@@ -1,5 +1,6 @@
-# humane-chrome
+# actions-chrome
 a browser extension that lets users keep track of what they're doing online
+
 
 ### hotlinks
 - base code for react-chrome from [this](https://github.com/satendra02/react-chrome-extension) boilerplate
