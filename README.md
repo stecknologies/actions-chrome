@@ -1,5 +1,6 @@
 # actions-chrome
 a browser extension that lets users keep track of what they're doing online
+download [here](https://chrome.google.com/webstore/detail/actions/hackejoehocjnjnkkfakhajmbofgonko)
 
 
 ### hotlinks
